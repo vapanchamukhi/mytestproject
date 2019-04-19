@@ -17,7 +17,12 @@ public class UserServiceImpl implements UserService {
 
 	public UserEntity saveUser(UserEntity userEntity) {
 		// TODO Auto-generated method stub
-		userEntityJpaRepository.save(userEntity);
+		List<UserEntity> user = userEntityJpaRepository.findByUserName(userEntity.getUserName());
+		System.out.println(user);
+		if(user.size() == 0)
+			userEntityJpaRepository.save(userEntity);
+		else
+			userEntity = user.get(0);
 		return userEntity;
 	}
 	
